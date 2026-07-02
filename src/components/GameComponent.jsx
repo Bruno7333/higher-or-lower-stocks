@@ -9,3 +9,5 @@ function GameComponent({stock1}, {stock2}){
     );
 
 }
+
+export default GameComponent

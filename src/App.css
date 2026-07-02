@@ -1,0 +1,88 @@
+.game {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.stock-card {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.company-logo img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.company-name {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.company-ticker {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.company-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 0.75rem;
+}
+
+.vs {
+  flex: 0 0 200px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.buttons button,
+.gameover button {
+  padding: 0.75rem 1.25rem;
+  border-color: black;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: purple;
+  color: #fff;
+}
+
+.buttons button:hover,
+.gameover button:hover {
+  background: plum;
+}
+
+.gameover {
+  margin-top: 2rem;
+}
+
+.small-font {
+    font-size: 10px;
+}
