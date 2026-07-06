@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import StockCard from './components/StockCard'
 import { getRandomStock } from './services/stockService'
+import AppMainComponent from './components/AppMainComponent'
 
 function App() {
   const [leftStock, setLeftStock] = useState(null)   // price shown
@@ -93,39 +94,16 @@ function App() {
       </div>
   }
 
-  return (
-    <div className="game">
-      <h1>Higher or Lower</h1>
-      <div className="scoreboard">
-        <span>Streak: {streak}</span>
-        <span>Best: {highScore}</span>
-      </div>
-
-      <div className="cards">
-        <StockCard stock={leftStock} revealed={true} />
-
-        <div className="vs">
-          <p>Is <strong>{rightStock.name}</strong>'s price higher or lower than <strong>{leftStock.name}</strong>? </p>
-          <p className="small-font">(All stock prices are from previous day close)</p>
-          {status === 'playing' && (
-            <div className="buttons">
-              <button onClick={() => handleGuess(true)}>Higher</button>
-              <button onClick={() => handleGuess(false)}>Lower</button>
-            </div>
-          )}
-        </div>
-
-        <StockCard stock={rightStock} revealed={status === 'gameover'} />
-      </div>
-
-      {status === 'gameover' && (
-        <div className="gameover">
-          <p>Wrong! {rightStock.ticker} was ${rightStock.price.toFixed(2)}.</p>
-          <p>Final streak: {streak}</p>
-          <button onClick={startGame}>Play Again</button>
-        </div>
-      )}
-    </div>
+  return(
+    <AppMainComponent
+      stock1={leftStock}
+      stock2={rightStock}
+      status={status}
+      streak={streak}
+      highScore={highScore}
+      onGuess={handleGuess}
+      onPlayAgain={startGame}
+    />
   )
 }
 
