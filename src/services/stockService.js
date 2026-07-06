@@ -1,32 +1,23 @@
-// ============================================================================
-// THIS IS THE ONLY FILE YOU CHANGE TO ADD THE REAL API.
-// ----------------------------------------------------------------------------
-// The rest of the app just calls getRandomStock(). Right now it returns a
-// random stock from the mock list. Later, replace the body of getRandomStock
-// with a fetch() to the massive.com API and map the response to this shape:
-//
-//   { ticker: string, name: string, price: number, imgurl: string }
-//
-// Example of what the real version will look like (pseudo-code):
-//
-//   export async function getRandomStock(excludeTicker) {
-//     const ticker = pickRandomTicker(excludeTicker);
-//     const res = await fetch(`https://api.massive.com/v1/quote/${ticker}`, {
-//       headers: { Authorization: `Bearer ${import.meta.env.VITE_MASSIVE_API_KEY}` },
-//     });
-//     if (!res.ok) throw new Error(`API error: ${res.status}`);
-//     const data = await res.json();
-//     return { ticker: data.symbol, name: data.name, price: data.price, imgurl: data.logo };
-//   }
-// ============================================================================
-
-import mockStocks from "../data/mockStocks";
 import tickers from "../data/tickers";
 
 import { restClient } from '@massive.com/client-js';
 
 const massiveApiKey = import.meta.env.VITE_MASSIVE_API_KEY
 const massiveRest = restClient(massiveApiKey, 'https://api.massive.com');
+
+function getPreviousTradingDay(){
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+
+  const day = date.getDay();
+  if (day === 0) date.setDate(date.getDate() - 2); //Sun -> Friday
+  else if (day === 6) date.setDate(date.getDate() - 1); //Sat -> Friday
+
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
 
 async function getTickerData(get_ticker) {
   let response1, response2;
@@ -46,7 +37,7 @@ async function getTickerData(get_ticker) {
     response2 = await massiveRest.getStocksOpenClose(
       {
         stocksTicker: get_ticker,
-        date: "2026-07-01", //must be previous day so today july 1st
+        date: getPreviousTradingDay(), //This breaks for July 3rd because the market was closed due to 4th of July
         adjusted: "true"
       }
 
