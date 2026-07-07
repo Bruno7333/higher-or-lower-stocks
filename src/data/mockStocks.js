@@ -13,4 +13,6 @@ const mockStocks = [
   { ticker: "KO", name: "Coca-Cola Co.", price: 63.15, imgurl: "https://logo.clearbit.com/coca-cola.com" },
 ];
 
-export default mockStocks;
+const blankStock = { ticker: "???", name: "???", price: 0.00, imgurl: "https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_960_720.jpg"};
+
+export default blankStock;

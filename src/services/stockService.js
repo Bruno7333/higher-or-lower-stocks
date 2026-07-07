@@ -51,7 +51,7 @@ async function getTickerData(get_ticker) {
     name: response1.results.name,
     ticker: get_ticker,
     price: response2.close,
-    imgurl: response1.results.branding.logo_url // Use: `${response1.results.branding.logo_url}?apiKey=${massiveApiKey}` for adding images, currently it uses too many api credits to make the application functional.
+    imgurl: `${response1.results.branding.logo_url}?apiKey=${massiveApiKey}` // Use for no images: response1.results.branding.logo_url // Use: `${response1.results.branding.logo_url}?apiKey=${massiveApiKey}` for adding images, currently it uses too many api credits to make the application functional.
   }
 
   return stock_return;

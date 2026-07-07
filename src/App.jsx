@@ -3,6 +3,7 @@ import './App.css'
 import StockCard from './components/StockCard'
 import { getRandomStock } from './services/stockService'
 import AppMainComponent from './components/AppMainComponent'
+import blankStock from './data/mockStocks'
 
 function App() {
   const [leftStock, setLeftStock] = useState(null)   // price shown
@@ -24,7 +25,7 @@ function App() {
       setStatus('playing')
     } catch (e){
       console.error(e)
-      setStatus('error')
+      setTimeout(() => setStatus('error'), 1000)
     }
 
   }
@@ -56,7 +57,7 @@ function App() {
       setRightStock(next)
     } catch (e) {
       console.error(e)
-      setStatus('error')
+      setTimeout(() => setStatus('error'), 1000)
     }
   }
 
@@ -76,7 +77,7 @@ function App() {
       setStatus('playing')
     } catch (e) {
       console.error(e)
-      setStatus('error')
+      setTimeout(() => setStatus('error'), 1000)
     }
   }
 
@@ -89,9 +90,17 @@ function App() {
   }
 
   if (status === 'loading' || !leftStock || !rightStock) {
-    return <div className="game">
-      <p>Loading...</p>
-      </div>
+    return(
+      <AppMainComponent
+      stock1={blankStock}
+      stock2={blankStock}
+      status={status}
+      streak={streak}
+      highScore={highScore}
+      onGuess={handleGuess}
+      onPlayAgain={startGame}
+    />
+    )
   }
 
   return(
