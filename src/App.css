@@ -63,8 +63,17 @@
   margin-top: 1rem;
 }
 
+.retry-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
 .buttons button,
-.gameover button {
+.gameover button,
+.retry-row button {
   padding: 0.75rem 1.25rem;
   border-color: black;
   border-radius: 8px;
@@ -75,7 +84,8 @@
 }
 
 .buttons button:hover,
-.gameover button:hover {
+.gameover button:hover,
+.retry-row button:hover {
   background: plum;
 }
 
@@ -85,4 +95,12 @@
 
 .small-font {
     font-size: 10px;
+}
+
+.dino-section {
+  margin-top: 4rem;        /* clear separation from the Try Again button */
+}
+
+.dino-section p {
+  margin: 0 0 0.5rem;      /* label hugs the game below it */
 }

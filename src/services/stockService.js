@@ -30,7 +30,7 @@ async function getTickerData(get_ticker) {
     console.log('Response:', response1);
   } catch (e) {
     console.error('An error happened:', e);
-    return null;
+    throw e; // pass the real cause (e.g. 429) up to App instead of hiding it behind null
   }
 
   try{
@@ -44,7 +44,7 @@ async function getTickerData(get_ticker) {
     );
   } catch (e){
     console.error('An error happened:', e);
-    return null;
+    throw e; // pass the real cause (e.g. 429) up to App instead of hiding it behind null
   }
 
   const stock_return = {

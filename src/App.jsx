@@ -4,6 +4,7 @@ import StockCard from './components/StockCard'
 import { getRandomStock } from './services/stockService'
 import AppMainComponent from './components/AppMainComponent'
 import blankStock from './data/mockStocks'
+import ErrorPageComponent from './components/ErrorPageComponent'
 
 function App() {
   const [leftStock, setLeftStock] = useState(null)   // price shown
@@ -11,6 +12,7 @@ function App() {
   const [streak, setStreak] = useState(0)
   const [highScore, setHighScore] = useState(0)
   const [status, setStatus] = useState('loading')    // 'loading' | 'playing' | 'gameover'
+  const [errorType, setErrorType] = useState(null);
 
   // Sets up a fresh round with two different stocks.
   async function startGame() {
@@ -26,6 +28,7 @@ function App() {
     } catch (e){
       console.error(e)
       setTimeout(() => setStatus('error'), 1000)
+      setErrorType(e)
     }
 
   }
@@ -57,6 +60,7 @@ function App() {
       setRightStock(next)
     } catch (e) {
       console.error(e)
+      setErrorType(e)
       setTimeout(() => setStatus('error'), 1000)
     }
   }
@@ -77,16 +81,13 @@ function App() {
       setStatus('playing')
     } catch (e) {
       console.error(e)
+      setErrorType(e)
       setTimeout(() => setStatus('error'), 1000)
     }
   }
 
   if (status === 'error'){
-    return <div className="game">
-      <p>Something went wrong :(</p>
-      <p>Probably ran out of <strong>API credits</strong> (I only get 5 every minute)</p>
-      <div className="buttons">Wait a little while and then: <button onClick={() => loadAgain()}>Try Again</button></div>
-    </div>
+    return (<ErrorPageComponent errorType={errorType} onRetry={loadAgain}/>)
   }
 
   if (status === 'loading' || !leftStock || !rightStock) {
