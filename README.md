@@ -1,20 +1,36 @@
-# React + Vite
+# Higher or Lower: Stock Picker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A guessing game with real stock prices. Two companies appear side by side — one price is revealed, the other is hidden. Is the hidden one **higher or lower**? Guess right and your streak grows. Guess wrong and it's game over.
 
-Currently, two official plugins are available:
+## How to Play
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Look at the stock on the left — its price is shown.
+2. Decide if the stock on the right closed **Higher** or **Lower**.
+3. Every correct guess extends your streak, and the right card slides left for the next round.
+4. One wrong guess ends the run. Can you beat your best streak?
 
-## React Compiler
+All prices are real closing prices from the previous trading day, along with real company names and logos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- **Live stock data** from the [massive.com](https://massive.com) API — prices, company names, and logos
+- **Streak & best score** tracking across rounds
+- **Friendly error page** that explains what went wrong (usually running out of API credits — the free tier only allows 5 requests per minute)
+- **A playable dino game** on the error page, so waiting for API credits is actually fun
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Running It Yourself
 
+```bash
+npm install
+npm run dev
+```
 
-# Dino Game in Error Page:
-Offline dino game from the Chromium project (BSD 3-Clause), via github.com/wayou/t-rex-runner.
+You'll need a free API key from massive.com. Copy `.env.example` to `.env` and fill in your key:
+
+```
+VITE_MASSIVE_API_KEY=your_key_here
+```
+
+## Dino Game in Error Page
+
+The offline dino game comes from the Chromium project (BSD 3-Clause license), via [wayou/t-rex-runner](https://github.com/wayou/t-rex-runner), with minor spacing tweaks. License and copyright notices are preserved in `public/dino/`.
