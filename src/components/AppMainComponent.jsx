@@ -1,6 +1,6 @@
 import StockCard from './StockCard.jsx'
 
-function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, onPlayAgain }){ // have to pass in all parameters and all functions used
+function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, onPlayAgain, loading = false }){ // have to pass in all parameters and all functions used
     return(
         <div className="game">
       <h1>Higher or Lower</h1>
@@ -10,7 +10,7 @@ function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, 
       </div>
 
       <div className="cards">
-        <StockCard stock={stock1} revealed={true} />
+        <StockCard stock={stock1} revealed={true} loading={loading} />
 
         <div className="vs">
           <p>Is <strong>{stock2.name}</strong>'s price higher or lower than <strong>{stock1.name}</strong>? </p>
@@ -23,7 +23,7 @@ function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, 
           )}
         </div>
 
-        <StockCard stock={stock2} revealed={status === 'gameover'} />
+        <StockCard stock={stock2} revealed={status === 'gameover'} loading={loading} />
       </div>
 
       {status === 'gameover' && (

@@ -95,6 +95,7 @@ function App() {
       <AppMainComponent
       stock1={blankStock}
       stock2={blankStock}
+      loading={true}
       status={status}
       streak={streak}
       highScore={highScore}
