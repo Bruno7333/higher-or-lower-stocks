@@ -61,7 +61,7 @@ function App() {
     } catch (e) {
       console.error(e)
       setErrorType(e)
-      setTimeout(() => setStatus('error'), 1000)
+      setTimeout(() => setStatus('error'), 1500)
     }
   }
 
@@ -82,7 +82,7 @@ function App() {
     } catch (e) {
       console.error(e)
       setErrorType(e)
-      setTimeout(() => setStatus('error'), 1000)
+      setTimeout(() => setStatus('error'), 1500)
     }
   }
 
