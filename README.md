@@ -22,14 +22,16 @@ All prices are real closing prices from the previous trading day, along with rea
 
 ```bash
 npm install
-npm run dev
+npx vercel dev
 ```
 
 You'll need a free API key from massive.com. Copy `.env.example` to `.env` and fill in your key:
 
 ```
-VITE_MASSIVE_API_KEY=your_key_here
+MASSIVE_API_KEY=your_key_here
 ```
+
+The key stays server-side: the browser talks to serverless functions in `/api`, which proxy massive.com and cache each ticker's data once per day. (`npx vercel dev` runs both the site and the functions locally; plain `npm run dev` runs only the frontend, so stock data won't load.)
 
 ## Dino Game in Error Page
 
