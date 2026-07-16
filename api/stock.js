@@ -1,5 +1,13 @@
 import { getTickerDetails, getOpenClose, isValidTicker } from './_lib/massive.js';
 
+function getSecondsTillTmr(){
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate()+1);
+    tomorrow.setHours(0, 0, 0, 0);
+    return Math.floor((tomorrow - now) / 1000);
+}
+
 export default async function handler(req, res) {
   const ticker = String(req.query.ticker || '').toUpperCase();
   if (!isValidTicker(ticker)) {
@@ -10,8 +18,9 @@ export default async function handler(req, res) {
     const details = await getTickerDetails(ticker);
     const openClose = await getOpenClose(ticker);
 
-    // Vercel's CDN caches this response for an hour, shared across ALL visitors.
-    res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=600');
+    // Vercel's CDN caches this response for an hour, shared across ALL visitors.d
+    const secondsUntilTomorrow = getSecondsTillTmr();
+    res.setHeader('Cache-Control', `s-maxage=${secondsUntilTomorrow}, stale-while-revalidate=600`);
 
     return res.status(200).json({
       name: details.results.name,
