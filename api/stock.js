@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const details = await getTickerDetails(ticker);
     const openClose = await getOpenClose(ticker);
 
-    // Vercel's CDN caches this response for an hour, shared across ALL visitors.d
+    // Vercel's CDN caches this response for an the rest of the day.
     const secondsUntilTomorrow = getSecondsTillTmr();
     res.setHeader('Cache-Control', `s-maxage=${secondsUntilTomorrow}, stale-while-revalidate=600`);
 

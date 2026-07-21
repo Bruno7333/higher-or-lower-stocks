@@ -1,3 +1,4 @@
+import ScoreSubmitComponent from './ScoreSubmitComponent.jsx';
 import StockCard from './StockCard.jsx'
 
 function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, onPlayAgain, loading = false }){ // have to pass in all parameters and all functions used
@@ -30,6 +31,7 @@ function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, 
         <div className="gameover">
           <p>Wrong! {stock2.ticker} was ${stock2.price.toFixed(2)}.</p>
           <p>Final streak: {streak}</p>
+          <ScoreSubmitComponent streak={streak}/>
           <button onClick={onPlayAgain}>Play Again</button>
         </div>
       )}

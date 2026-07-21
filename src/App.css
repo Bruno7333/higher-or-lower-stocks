@@ -93,6 +93,50 @@
   margin-top: 2rem;
 }
 
+.score-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;          /* error message wraps to its own line */
+  gap: 0.75rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.score-submit input {
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;       /* matches the buttons */
+  font-size: 1rem;
+  font-family: inherit;
+  width: 11rem;
+  text-align: center;
+}
+
+.score-submit input:focus {
+  outline: none;
+  border-color: purple;
+}
+
+.buttons button:disabled,
+.gameover button:disabled,
+.retry-row button:disabled {
+  background: #cbb3cb;      /* washed-out purple reads as "not ready" */
+  cursor: not-allowed;
+}
+
+.submit-error {
+  width: 100%;              /* full row of the flex container */
+  margin: 0;
+  color: #c0392b;
+  font-size: 0.85rem;
+}
+
+.submit-done {
+  margin: 0;
+  font-weight: 600;
+  color: purple;
+}
+
 .small-font {
     font-size: 10px;
 }
