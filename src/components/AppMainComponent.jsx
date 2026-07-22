@@ -1,7 +1,7 @@
 import ScoreSubmitComponent from './ScoreSubmitComponent.jsx';
 import StockCard from './StockCard.jsx'
 
-function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, onPlayAgain, loading = false }){ // have to pass in all parameters and all functions used
+function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, onPlayAgain, loading = false, onOpenLeaderboard }){ // have to pass in all parameters and all functions used
     return(
         <div className="game">
       <h1>Higher or Lower</h1>
@@ -23,8 +23,10 @@ function AppMainComponent({ stock1, stock2, status, streak, highScore, onGuess, 
             </div>
           )}
         </div>
-
         <StockCard stock={stock2} revealed={status === 'gameover'} loading={loading} />
+      </div>
+      <div className="buttons">
+        <button onClick={onOpenLeaderboard}>Open Leaderboard</button>
       </div>
 
       {status === 'gameover' && (

@@ -5,6 +5,7 @@ import { getRandomStock } from './services/stockService'
 import AppMainComponent from './components/AppMainComponent'
 import blankStock from './data/mockStocks'
 import ErrorPageComponent from './components/ErrorPageComponent'
+import LeaderboardPageComponent from './components/LeaderboardPageComponent'
 
 function App() {
   const [leftStock, setLeftStock] = useState(null)   // price shown
@@ -13,6 +14,7 @@ function App() {
   const [highScore, setHighScore] = useState(0)
   const [status, setStatus] = useState('loading')    // 'loading' | 'playing' | 'gameover'
   const [errorType, setErrorType] = useState(null);
+  const [prevStatus, setPrevStatus] = useState('playing') // screen to return to from the leaderboard
 
   // Sets up a fresh round with two different stocks.
   async function startGame() {
@@ -65,6 +67,23 @@ function App() {
     }
   }
 
+  async function openLeaderboard(){
+    setPrevStatus(status)
+    setStatus('leaderboard')
+  }
+
+  async function continueGame(){
+    if (!leftStock){
+      startGame()
+      return
+    }
+    if (!rightStock){
+      loadAgain()
+      return
+    }
+    setStatus(prevStatus)
+  }
+
   async function loadAgain(){
     // No game in progress (error happened at initial load) -> start fresh.
     if (!leftStock) {
@@ -90,7 +109,11 @@ function App() {
     return (<ErrorPageComponent errorType={errorType} onRetry={loadAgain}/>)
   }
 
-  if (status === 'loading' || !leftStock || !rightStock) {
+  if (status === 'leaderboard'){
+    return (<LeaderboardPageComponent onBack={continueGame}/>)
+  }
+
+  if (status === 'loading' || !leftStock || !rightStock) { //change later so that
     return(
       <AppMainComponent
       stock1={blankStock}
@@ -101,6 +124,7 @@ function App() {
       highScore={highScore}
       onGuess={handleGuess}
       onPlayAgain={startGame}
+      onOpenLeaderboard={openLeaderboard}
     />
     )
   }
@@ -114,6 +138,7 @@ function App() {
       highScore={highScore}
       onGuess={handleGuess}
       onPlayAgain={startGame}
+      onOpenLeaderboard={openLeaderboard}
     />
   )
 }
